@@ -1,13 +1,16 @@
 import streamlit as st
 import pandas as pd
 import joblib
-
+import os
 
 # --------------------------------------------------
 # Load the trained ML model
 # --------------------------------------------------
 
-model = joblib.load("best_food_delivery_model.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "best_food_delivery_model.pkl")
+
+model = joblib.load(MODEL_PATH)
 
 
 # --------------------------------------------------
