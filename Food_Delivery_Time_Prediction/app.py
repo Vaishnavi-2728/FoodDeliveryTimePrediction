@@ -7,9 +7,7 @@ import joblib
 # Load the trained ML model
 # --------------------------------------------------
 
-model = joblib.load(
-    "Food_Delivery_Time_Prediction/best_food_delivery_model.pkl"
-)
+model = joblib.load("best_food_delivery_model.pkl")
 
 
 # --------------------------------------------------
