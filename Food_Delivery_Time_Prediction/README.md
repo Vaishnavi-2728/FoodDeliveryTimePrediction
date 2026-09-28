@@ -268,3 +268,5 @@ Open your web browser and navigate to:
 * **Project**: Food Delivery Time Prediction Using Machine Learning
 * **Degree**: Bachelor of Technology (B.Tech) in Computer Science & Engineering
 * **Field**: Machine Learning & Applied Artificial Intelligence
+
+Vercel deployment update
