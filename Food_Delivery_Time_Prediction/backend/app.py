@@ -59,6 +59,7 @@ MODEL_CANDIDATE_PATHS = [
 
 model = None
 model_path_used = None
+model_load_error = None
 
 for path in MODEL_CANDIDATE_PATHS:
     if os.path.exists(path):
@@ -68,10 +69,14 @@ for path in MODEL_CANDIDATE_PATHS:
             logger.info(f"Successfully loaded machine learning model from: {path}")
             break
         except Exception as e:
+            model_load_error = str(e)
             logger.error(f"Failed to load model from candidate path {path}: {e}")
 
 if model is None:
-    logger.error("WARNING: Could not find or load 'best_food_delivery_model.pkl' in any expected location.")
+    logger.error(
+        f"WARNING: Could not find or load 'best_food_delivery_model.pkl'. "
+        f"Error: {model_load_error}"
+    )
 
 # --------------------------------------------------
 # ML Specification & Feature Constants
@@ -175,10 +180,9 @@ def predict():
     delivery time using the trained Linear Regression pipeline.
     """
     if model is None:
-        return jsonify({
-            "success": False,
-            "error": "The machine learning model could not be loaded on the server. Please check 'best_food_delivery_model.pkl'."
-        }), 503
+    return jsonify({
+        "error": f"Model loading failed: {model_load_error}"
+    }), 503
 
     payload = request.get_json(silent=True)
     if not payload:
